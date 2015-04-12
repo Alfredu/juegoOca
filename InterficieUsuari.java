@@ -11,4 +11,6 @@ package entregable1;
  */
 public class InterficieUsuari {
     
+    //Atributs=======//
+    
 }
