@@ -12,10 +12,14 @@ package entregable1;
 public class Jugador {
     //====Atributs=====//
     private String nom;
+    private Dau dau;
+    private Fitxa fitxa;
     
     //====Constructor===// (INCOMPLET)
     public Jugador(String nomArg, String colorArg, Dau dauArg, Tauler taulerArg){
         this.nom = nomArg;
+        this.fitxa = new Fitxa(colorArg, this, new Casella(1, "Casella convencional") );
+        this.dau = dauArg;
         
     }
     
