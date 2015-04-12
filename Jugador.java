@@ -25,6 +25,34 @@ public class Jugador {
     
     //==Metodes===// (INCOMPLET)
     
+    public Dau getDau(){
+        return this.dau;
+    }
+    
+    public Fitxa getFitxa(){
+        return this.fitxa;
+    }
+    
+    String getNom(){
+        return this.nom;
+    }
+    
+    public boolean jugarTorn(){
+        return true;
+    }
+    
+    public void mouFitxa(int numCasellaDesti){
+        
+    }
+    
+    public int numeroCasellaFitxaJugador(){
+        return this.fitxa.getCasella().getNumero();
+    }
+    
+    public int tiraDau(){
+        this.dau.tirar();
+        return this.dau.getValor();
+    }
     
         
 }
