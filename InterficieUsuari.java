@@ -14,21 +14,25 @@ import java.util.Scanner;
 public class InterficieUsuari {
     
     //Atributs=======//
-    Controlador controlador = new Controlador(this);
+    private Controlador controlador;
+    private Scanner scanner;
     //Constructor
-    
+    public InterficieUsuari(){
+        controlador =  new Controlador(this);
+        scanner = new Scanner(System.in) ;
+        
+    }
     //Mètodes=========//
     public void altaJugador(){
-        Scanner sc = new Scanner(System.in);
         String nom, color;
         int error;
         
               
         System.out.println("Nom del jugador: ");
-        nom = sc.next();
+        nom = scanner.nextLine();
         
         System.out.println("Color de la fitxa:");
-        color = sc.next();
+        color = scanner.nextLine();
         
         error = controlador.afegeixJugador(nom, color);
         
@@ -40,18 +44,18 @@ public class InterficieUsuari {
             System.out.println("Ja hi ha un altre jugador controlant una fitxa d'aquest color");
         }
         
-        
+         Scanner scanner = new Scanner(System.in);
+
         
         
     }
     
     public void eliminaJugador(){
-        Scanner sc = new Scanner(System.in);
-        String color;
+               String color;
         int error;
         
         System.out.println("Color de la fitxa: ");
-        color = sc.next();
+        color = scanner.next();
         
         error = controlador.eliminaJugador(color);
         
