@@ -13,30 +13,30 @@ import java.util.TreeMap;
  */
 public class Tauler {
     //======Atributs====//
-    private TreeMap<Integer, Casella> caselles;
+    private Casella[]  caselles;
     
     //======Constructor===//
     public Tauler(){
-        this.caselles = new TreeMap();
+        this.caselles = new Casella[63];
         
         for(int i=0; i<63; i++){
             
-            caselles.put(i, new Casella(i, "Casella convencional"));
+            caselles[i] = new Casella(i, "Casella convencional");
         }
     }
     
     //=====Metodes========//
     
     public void eliminaFitxes(Fitxa fitxaArg, int numeroArg){
-        caselles.get(numeroArg).eliminaFitxa(fitxaArg);
+        caselles[numeroArg].eliminaFitxa(fitxaArg);
     }
     
     public Casella getCasella(int numeroArg){
-       return caselles.get(numeroArg);
+       return caselles[numeroArg];
     }
     
     public void situaFitxa(Fitxa fitxaArg, int numeroArg){
-        caselles.get(numeroArg).situaFitxa(fitxaArg);
+        caselles[numeroArg].situaFitxa(fitxaArg);
     }
 }
 
