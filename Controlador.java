@@ -15,7 +15,6 @@ import java.util.Iterator;
 public class Controlador {
 
     //======Atributs====//
-
     private HashMap<String, Jugador> jugadors;
     Dau dau;
     Tauler tauler;
@@ -51,51 +50,48 @@ public class Controlador {
     }
 
     public int jugarPartida() {
+        if (jugadors.size() < 2) return -1;
+        
         Iterator<Jugador> it_jugador = jugadors.values().iterator();
         //Iterator<String> it_color = jugadors.keySet().iterator();
-        boolean partida_acabada = false;
+        boolean partida_acabada = false, minim2Jugadors = true;
         int torn = 1;
 
+        if (jugadors.size() < 2) {
+            return -1;
+        }
 
         while (it_jugador.hasNext()) {
             Jugador jugador_iterar = it_jugador.next();
             tauler.situaFitxa(jugador_iterar.getFitxa(), 1);
         }
         it_jugador = jugadors.values().iterator();
-        Jugador jugador_iterant = it_jugador.next();  
+        Jugador jugador_iterant = it_jugador.next();
         Fitxa fitxa_jugador_iterant = jugador_iterant.getFitxa();
 
-        while (!partida_acabada) {
-            this.iu.mostraPerPantalla("Torn numero: "+ torn);
-            this.iu.mostraPerPantalla("Juga el seu torn "+ jugador_iterant.getNom());
+        while (!partida_acabada){
+            this.iu.mostraPerPantalla("\nTorn numero: " + torn);
+            this.iu.mostraPerPantalla("Juga el seu torn " + jugador_iterant.getNom());
             this.iu.mostraPerPantalla("Controla la fitxa de color " + fitxa_jugador_iterant.getColor());
-            this.iu.mostraPerPantalla("Situada a la casella " + jugador_iterant.numeroCasellaFitxaJugador() 
-                    + "(" + fitxa_jugador_iterant.getCasella().getDescripcio()+")");
-              
+            this.iu.mostraPerPantalla("Situada a la casella " + jugador_iterant.numeroCasellaFitxaJugador()
+                    + "(" + fitxa_jugador_iterant.getCasella().getDescripcio() + ")");
+
             partida_acabada = jugador_iterant.jugarTorn();
-            
-            this.iu.mostraPerPantalla("Valor del dau: "+this.dau.getValor());
-            this.iu.mostraPerPantalla("Casella desti: "+jugador_iterant.numeroCasellaFitxaJugador());
-            
-            
-            if(it_jugador.hasNext()){
+
+            this.iu.mostraPerPantalla("Valor del dau: " + this.dau.getValor());
+            this.iu.mostraPerPantalla("Casella desti: " + jugador_iterant.numeroCasellaFitxaJugador());
+
+            if (it_jugador.hasNext()) {
                 jugador_iterant = it_jugador.next();
-            }
-            
-            else{
+                fitxa_jugador_iterant = jugador_iterant.getFitxa();
+            } else {
                 it_jugador = jugadors.values().iterator();
+                jugador_iterant = it_jugador.next();
+                fitxa_jugador_iterant = jugador_iterant.getFitxa();
                 torn++;
             }
-
+            
         }
-    if(jugadors.size()>2){
-        return -1;
+        return 0;
     }
-    
-    else{
-        return 0; 
-    }
-        
-    }
-
 }

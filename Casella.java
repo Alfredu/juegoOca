@@ -13,42 +13,41 @@ import java.util.TreeMap;
  * @author aleix
  */
 public class Casella {
+
     //Atributs=============//
+
     private int numero;
     private String descripcio;
-    
+
     private HashMap<String, Fitxa> fitxes;
 
     //Constructor============//
     public Casella(int numeroArg, String descripcioArg) {
         this.numero = numeroArg;
         this.descripcio = descripcioArg;
-        this.fitxes = new HashMap();    
+        this.fitxes = new HashMap();
     }
-   
+
     //Metodes===============//   
-    
-    public void eliminaFitxa(Fitxa fitxaArg){
+    public void eliminaFitxa(Fitxa fitxaArg) {
         fitxes.remove(fitxaArg.getColor());
     }
-    
-    public String getDescripcio( ){
+
+    public String getDescripcio() {
         return this.descripcio;
     }
-    
-    public Fitxa getFitxa(String color){
+
+    public Fitxa getFitxa(String color) {
         return this.fitxes.get(color);
     }
-    
-    public int getNumero(){
-        return this.numero;
+
+    public int getNumero() {
+        return this.numero + 1;
     }
-    
-    public void situaFitxa(Fitxa fitxa){
+
+    public void situaFitxa(Fitxa fitxa) {
         fitxes.put(fitxa.getColor(), fitxa);
         fitxa.setCasella(this);
     }
-    
-    
-    
+
 }

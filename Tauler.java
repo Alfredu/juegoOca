@@ -10,32 +10,31 @@ package entregable1;
  * @author aleix
  */
 public class Tauler {
+
     //======Atributs====//
-    private Casella[]  caselles;
-    
+
+    private Casella[] caselles;
+
     //======Constructor===//
-    public Tauler(){
+    public Tauler() {
         this.caselles = new Casella[63];
-        
-        for(int i=0; i<63; i++){
-            
-            caselles[i] = new Casella(i+1, "Casella convencional");
+
+        for (int i = 0; i < 63; i++) {
+
+            caselles[i] = new Casella(i, "Casella convencional");
         }
     }
-    
+
     //=====Metodes========//
-    
-    public void eliminaFitxes(Fitxa fitxaArg, int numeroArg){
-        caselles[numeroArg].eliminaFitxa(fitxaArg);
+    public void eliminaFitxes(Fitxa fitxaArg, int numeroArg) {
+        caselles[numeroArg - 1].eliminaFitxa(fitxaArg);
     }
-    
-    public Casella getCasella(int numeroArg){
-       return caselles[numeroArg];
+
+    public Casella getCasella(int numeroArg) {
+        return caselles[numeroArg - 1];
     }
-    
-    public void situaFitxa(Fitxa fitxaArg, int numeroArg){
-        caselles[numeroArg].situaFitxa(fitxaArg);
+
+    public void situaFitxa(Fitxa fitxaArg, int numeroArg) {
+        caselles[numeroArg - 1].situaFitxa(fitxaArg);
     }
 }
-
-

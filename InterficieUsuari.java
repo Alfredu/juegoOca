@@ -11,6 +11,7 @@ import java.util.Scanner;
  *
  * @author aleix
  */
+
 public class InterficieUsuari {
 
     //Atributs=======//
@@ -18,7 +19,6 @@ public class InterficieUsuari {
     private Scanner scanner;
 
     //Constructor
-
     public InterficieUsuari() {
         controlador = new Controlador(this);
         scanner = new Scanner(System.in);
@@ -26,7 +26,6 @@ public class InterficieUsuari {
     }
 
     //Mètodes=========//
-
     public void altaJugador() {
         String nom, color;
         int error;
@@ -46,8 +45,6 @@ public class InterficieUsuari {
         if (error == -1) {
             System.out.println("Ja hi ha un altre jugador controlant una fitxa d'aquest color");
         }
-
-        
 
     }
 
@@ -69,15 +66,18 @@ public class InterficieUsuari {
     }
 
     public void iniciarPartida() {
-        this.controlador.jugarPartida();
+        int status = this.controlador.jugarPartida();
+
+        System.out.println(status);
     }
 
     public static void main(String[] args) {
-
+        InterficieUsuari iu = new InterficieUsuari();
+        iu.run();
     }
 
     public void mostraComandes() {
-        System.out.println("alta - Afegeix un nou jugador a la partida\nelimina - Elimina un dels jugadors afegits prèviament a la partida\ninicia - Inicia la partida amb els jugadors introduïts\najuda - Mostra novament les comandes vàlides per a l'aplicació\nsurt - Surt del joc de la oca");
+        this.mostraPerPantalla("Introdueix una de les comandes de la llista\nalta - Afegeix un nou jugador a la partida\nelimina - Elimina un dels jugadors afegits prèviament a la partida\ninicia - Inicia la partida amb els jugadors introduïts\najuda - Mostra novament les comandes vàlides per a l'aplicació\nsurt - Surt del joc de la oca");
     }
 
     public void mostraPerPantalla(String msgArg) {
@@ -85,7 +85,32 @@ public class InterficieUsuari {
     }
 
     public void run() {
-
+        String stringComandes = ("alta elimina inicia ajuda surt");
+        String[] arrayComandes = stringComandes.split(" ");
+        String opcioTriada;
+        
+        this.mostraPerPantalla("Benvinguts a l'aplicació del joc de la oca de MOO");
+        this.mostraComandes();
+        
+        opcioTriada = scanner.nextLine();
+        while(opcioTriada!=arrayComandes[4]){
+            if(opcioTriada.equals(arrayComandes[0])){
+                this.altaJugador();
+            }
+            else if(opcioTriada.equals(arrayComandes[1])){
+                this.eliminaJugador();
+            }
+            else if(opcioTriada.equals(arrayComandes[2])){
+                this.iniciarPartida();
+            }
+            else if(opcioTriada.equals(arrayComandes[3])){
+                this.mostraComandes();
+            }
+            else if(opcioTriada.equals(arrayComandes[4])){
+                System.exit(0);
+            }
+        }
+        
     }
 
 }

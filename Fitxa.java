@@ -10,35 +10,35 @@ package entregable1;
  * @author aleix
  */
 public class Fitxa {
+
     //Atributs========//
+
     private String color;
     private Casella casellaActual;
     private Jugador jugador;
-    
-    
+
     //Constructor=======//
-    public Fitxa(String colorArg, Jugador jugadorArg, Casella casellaArg){
+    public Fitxa(String colorArg, Jugador jugadorArg, Casella casellaArg) {
         this.color = colorArg;
         this.casellaActual = casellaArg;
-        this.jugador = jugadorArg;     
+        this.jugador = jugadorArg;
     }
-    
+
     //Metodes=======//   
     public Casella getCasella() {
         return this.casellaActual;
     }
-    
-    public String getColor(){
+
+    public String getColor() {
         return this.color;
     }
 
     public Jugador getJugador() {
         return jugador;
     }
-    
+
     public void setCasella(Casella casellaArg) {
         this.casellaActual = casellaArg;
     }
-    
-    
+
 }

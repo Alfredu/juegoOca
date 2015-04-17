@@ -11,20 +11,22 @@ package entregable1;
  * @author marta cosano
  */
 public class Dau {
+
     //Atributs==============//
+
     private int valor;
-    
+
     //Constructor=======//
-    public Dau(){
+    public Dau() {
         this.valor = 1;
     }
-    
+
     //Mètodes==============//
-    public int getValor(){
+    public int getValor() {
         return this.valor;
     }
-    
-    public void tirar(){
-        this.valor = (int)(System.nanoTime() % 6) + 1;
-    }      
+
+    public void tirar() {
+        this.valor = (int) (System.nanoTime() % 6) + 1;
+    }
 }
