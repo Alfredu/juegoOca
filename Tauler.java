@@ -5,8 +5,6 @@
  */
 package entregable1;
 
-import java.util.TreeMap;
-
 /**
  *
  * @author aleix
@@ -21,7 +19,7 @@ public class Tauler {
         
         for(int i=0; i<63; i++){
             
-            caselles[i] = new Casella(i, "Casella convencional");
+            caselles[i] = new Casella(i+1, "Casella convencional");
         }
     }
     

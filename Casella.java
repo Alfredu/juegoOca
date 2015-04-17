@@ -5,6 +5,7 @@
  */
 package entregable1;
 
+import java.util.HashMap;
 import java.util.TreeMap;
 
 /**
@@ -16,13 +17,13 @@ public class Casella {
     private int numero;
     private String descripcio;
     
-    private TreeMap<String, Fitxa> fitxes;
+    private HashMap<String, Fitxa> fitxes;
 
     //Constructor============//
     public Casella(int numeroArg, String descripcioArg) {
         this.numero = numeroArg;
         this.descripcio = descripcioArg;
-        this.fitxes = new TreeMap();    
+        this.fitxes = new HashMap();    
     }
    
     //Metodes===============//   
@@ -45,6 +46,7 @@ public class Casella {
     
     public void situaFitxa(Fitxa fitxa){
         fitxes.put(fitxa.getColor(), fitxa);
+        fitxa.setCasella(this);
     }
     
     

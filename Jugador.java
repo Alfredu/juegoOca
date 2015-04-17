@@ -14,16 +14,18 @@ public class Jugador {
     private String nom;
     private Dau dau;
     private Fitxa fitxa;
+    private Tauler tauler;
     
-    //====Constructor===// (INCOMPLET)
+    //====Constructor===// 
     public Jugador(String nomArg, String colorArg, Dau dauArg, Tauler taulerArg){
         this.nom = nomArg;
         this.fitxa = new Fitxa(colorArg, this, new Casella(1, "Casella convencional") );
         this.dau = dauArg;
+        this.tauler = taulerArg;
         
     }
     
-    //==Metodes===// (INCOMPLET)
+    //==Metodes===// 
     
     public Dau getDau(){
         return this.dau;
@@ -38,11 +40,25 @@ public class Jugador {
     }
     
     public boolean jugarTorn(){
-        return true;
+        int casellaOrigen = this.numeroCasellaFitxaJugador();
+        int numeroDau = this.tiraDau();
+        
+        if(casellaOrigen + this.tiraDau()>63){
+            this.mouFitxa(63-(casellaOrigen + numeroDau -63));
+        }
+        
+        else{            
+            this.mouFitxa(casellaOrigen + numeroDau);
+        }
+        
+        
+        return this.numeroCasellaFitxaJugador()==63;
     }
     
-    public void mouFitxa(int numCasellaDesti){
-        
+    public void mouFitxa(int numCasellaDestiArg){
+
+        this.tauler.eliminaFitxes(this.fitxa, this.numeroCasellaFitxaJugador());
+        this.tauler.situaFitxa(this.fitxa, numCasellaDestiArg);
     }
     
     public int numeroCasellaFitxaJugador(){

@@ -11,10 +11,6 @@ package entregable1;
  */
 public class test {
     public static void main(String[] args){
-        InterficieUsuari test = new InterficieUsuari();
-        
-        for(int i=0; i<2; i++){
-        test.altaJugador();
-        }
+       
     }
 }
