@@ -69,7 +69,7 @@ public class InterficieUsuari {
         int status = this.controlador.jugarPartida();
 
         if(status<0){
-            this.mostraPerPantalla("No es pot iniciar, afegeix com a minim 2 jugadors per jugar");
+            this.mostraPerPantalla("No es pot iniciar la partida, afegeix com a minim 2 jugadors per jugar");
             
         }
     }
