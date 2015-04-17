@@ -16,9 +16,9 @@ public class Controlador {
 
     //======Atributs====//
     private HashMap<String, Jugador> jugadors;
-    Dau dau;
-    Tauler tauler;
-    InterficieUsuari iu;
+    private Dau dau;
+    private Tauler tauler;
+    private InterficieUsuari iu;
 
     //Constructor===//
     public Controlador(InterficieUsuari iuArg) {
@@ -53,8 +53,7 @@ public class Controlador {
         if (jugadors.size() < 2) return -1;
         
         Iterator<Jugador> it_jugador = jugadors.values().iterator();
-        //Iterator<String> it_color = jugadors.keySet().iterator();
-        boolean partida_acabada = false, minim2Jugadors = true;
+        boolean partida_acabada = false;
         int torn = 1;
 
         if (jugadors.size() < 2) {
@@ -77,10 +76,11 @@ public class Controlador {
                     + "(" + fitxa_jugador_iterant.getCasella().getDescripcio() + ")");
 
             partida_acabada = jugador_iterant.jugarTorn();
-
             this.iu.mostraPerPantalla("Valor del dau: " + this.dau.getValor());
             this.iu.mostraPerPantalla("Casella desti: " + jugador_iterant.numeroCasellaFitxaJugador());
-
+            
+            if(partida_acabada) iu.mostraPerPantalla("El jugador "+ jugador_iterant.getNom()+" guanya la partida!!!!");
+            
             if (it_jugador.hasNext()) {
                 jugador_iterant = it_jugador.next();
                 fitxa_jugador_iterant = jugador_iterant.getFitxa();

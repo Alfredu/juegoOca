@@ -68,7 +68,10 @@ public class InterficieUsuari {
     public void iniciarPartida() {
         int status = this.controlador.jugarPartida();
 
-        System.out.println(status);
+        if(status<0){
+            this.mostraPerPantalla("No es pot iniciar, afegeix com a minim 2 jugadors per jugar");
+            
+        }
     }
 
     public static void main(String[] args) {
@@ -88,12 +91,14 @@ public class InterficieUsuari {
         String stringComandes = ("alta elimina inicia ajuda surt");
         String[] arrayComandes = stringComandes.split(" ");
         String opcioTriada;
+        boolean final_programa=false;
         
         this.mostraPerPantalla("Benvinguts a l'aplicació del joc de la oca de MOO");
         this.mostraComandes();
         
-        opcioTriada = scanner.nextLine();
-        while(opcioTriada!=arrayComandes[4]){
+        
+        while(!final_programa){
+            opcioTriada = scanner.nextLine();
             if(opcioTriada.equals(arrayComandes[0])){
                 this.altaJugador();
             }
@@ -107,7 +112,12 @@ public class InterficieUsuari {
                 this.mostraComandes();
             }
             else if(opcioTriada.equals(arrayComandes[4])){
-                System.exit(0);
+                this.mostraPerPantalla("Sortint del joc de la oca...");
+                final_programa=true;
+                
+            }
+            else{
+                this.mostraPerPantalla("Comanda incorrecta. Necessites ajuda? escriu 'ajuda' per obtenir una llista de comandes vàlides");
             }
         }
         
