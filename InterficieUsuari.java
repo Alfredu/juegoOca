@@ -53,7 +53,7 @@ public class InterficieUsuari {
         int error;
 
         System.out.println("Color de la fitxa: ");
-        color = scanner.next();
+        color = scanner.nextLine();
         error = controlador.eliminaJugador(color);
 
         if (error == 0) {
