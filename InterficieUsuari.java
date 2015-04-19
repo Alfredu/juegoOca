@@ -96,7 +96,6 @@ public class InterficieUsuari {
         this.mostraPerPantalla("Benvinguts a l'aplicació del joc de la oca de MOO");
         this.mostraComandes();
         
-        
         while(!final_programa){
             opcioTriada = scanner.nextLine();
             if(opcioTriada.equals(arrayComandes[0])){
@@ -113,12 +112,12 @@ public class InterficieUsuari {
             }
             else if(opcioTriada.equals(arrayComandes[4])){
                 this.mostraPerPantalla("Sortint del joc de la oca...");
-                final_programa=true;
-                
+                final_programa=true;                
             }
             else{
-                this.mostraPerPantalla("Comanda incorrecta. Necessites ajuda? escriu 'ajuda' per obtenir una llista de comandes vàlides");
+                    this.mostraPerPantalla("Comanda incorrecta. Necessites ajuda? escriu 'ajuda' per obtenir una llista de comandes vàlides");
             }
+            
         }
         
     }
