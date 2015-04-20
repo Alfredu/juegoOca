@@ -21,9 +21,11 @@ public class Jugador {
     //====Constructor===// 
     public Jugador(String nomArg, String colorArg, Dau dauArg, Tauler taulerArg) {
         this.nom = nomArg;
-        this.fitxa = new Fitxa(colorArg, this, new Casella(1, "Casella convencional"));
-        this.dau = dauArg;
         this.tauler = taulerArg;
+        this.dau = dauArg;
+        this.fitxa = new Fitxa(colorArg, this, this.tauler.getCasella(1));
+        
+        
 
     }
 
