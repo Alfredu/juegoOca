@@ -17,7 +17,8 @@ public class Casella {
 
     private int numero;
     private String descripcio;
-
+   
+    //Mapa de fitxes identificada cada una pel seu atribut unic color
     private HashMap<String, Fitxa> fitxes;
 
     //Constructor============//
@@ -40,6 +41,7 @@ public class Casella {
         return this.fitxes.get(color);
     }
 
+    //+1 perque l'array de caselles va de 0 a 62;
     public int getNumero() {
         return this.numero + 1;
     }
