@@ -10,12 +10,13 @@ import java.util.Iterator;
 
 /**
  *
- * @author aleix
+ * @author aleix sanchis
+ * @author marta cosano
  */
 public class Controlador {
 
     //======Atributs====//
-    private HashMap<String, Jugador> jugadors;
+    private HashMap<String, Jugador> jugadors;//Mapa de jugadors identificats pel seu color de fitxa
     private Dau dau;
     private Tauler tauler;
     private InterficieUsuari iu;
@@ -30,6 +31,7 @@ public class Controlador {
     }
 
     //====Metodes===//
+    //Afegeix un jugador si el color de la seva fitxa no esta en us ja.
     public int afegeixJugador(String nomArg, String colorArg) {
         if (jugadors.containsKey(colorArg)) {
             return -1;
@@ -38,7 +40,7 @@ public class Controlador {
             return 0;
         }
     }
-
+    //Donat un color, elimina el jugador que el te com a clau del mapa de jugadors ( si existeix)
     public int eliminaJugador(String colorArg) {
         Jugador eliminat = jugadors.remove(colorArg);
 
@@ -48,10 +50,12 @@ public class Controlador {
             return 0;
         }
     }
-
+   //Si ha com a minim dos jugadors, recorrre el mapa de jugadors i cada un juga el seu torn fins que algu guanya
     public int jugarPartida() {
-        if (jugadors.size() < 2) return -1;
-        
+        if (jugadors.size() < 2) {
+            return -1;
+        }
+
         Iterator<Jugador> it_jugador = jugadors.values().iterator();
         boolean partida_acabada = false;
         int torn = 1;
@@ -68,7 +72,7 @@ public class Controlador {
         Jugador jugador_iterant = it_jugador.next();
         Fitxa fitxa_jugador_iterant = jugador_iterant.getFitxa();
 
-        while (!partida_acabada){
+        while (!partida_acabada) {
             this.iu.mostraPerPantalla("\nTorn numero: " + torn);
             this.iu.mostraPerPantalla("Juga el seu torn " + jugador_iterant.getNom());
             this.iu.mostraPerPantalla("Controla la fitxa de color " + fitxa_jugador_iterant.getColor());
@@ -78,9 +82,11 @@ public class Controlador {
             partida_acabada = jugador_iterant.jugarTorn();
             this.iu.mostraPerPantalla("Valor del dau: " + this.dau.getValor());
             this.iu.mostraPerPantalla("Casella desti: " + jugador_iterant.numeroCasellaFitxaJugador());
-            
-            if(partida_acabada) iu.mostraPerPantalla("El jugador "+ jugador_iterant.getNom()+" guanya la partida!!!!");
-            
+
+            if (partida_acabada) {
+                iu.mostraPerPantalla("El jugador " + jugador_iterant.getNom() + " guanya la partida!!!!");
+            }
+
             if (it_jugador.hasNext()) {
                 jugador_iterant = it_jugador.next();
                 fitxa_jugador_iterant = jugador_iterant.getFitxa();
@@ -90,7 +96,7 @@ public class Controlador {
                 fitxa_jugador_iterant = jugador_iterant.getFitxa();
                 torn++;
             }
-            
+
         }
         return 0;
     }

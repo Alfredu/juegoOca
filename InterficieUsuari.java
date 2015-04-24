@@ -20,29 +20,29 @@ public class InterficieUsuari {
 
     //Constructor
     public InterficieUsuari() {
-        controlador = new Controlador(this);
-        scanner = new Scanner(System.in);
+        controlador = new Controlador(this);//Crea un nou controlador i es passa a si mateix com a parametre 
+        scanner = new Scanner(System.in);//Scanner per llegir inputs dusuari
 
     }
 
     //Mètodes=========//
     public void altaJugador() {
         String nom, color;
-        int error;
+        int retornAfegirUsuari;
 
-        System.out.println("Nom del jugador: ");
+        System.out.println("Nom del jugador: ");//Llegeix el nom que introdueix lusuari per teclat
         nom = scanner.nextLine();
 
-        System.out.println("Color de la fitxa:");
+        System.out.println("Color de la fitxa:");//Igual amb el color
         color = scanner.nextLine();
 
-        error = controlador.afegeixJugador(nom, color);
+        retornAfegirUsuari = controlador.afegeixJugador(nom, color);//Crea un nou jugador i guardem el retorn 
 
-        if (error == 0) {
+        if (retornAfegirUsuari == 0) {
             System.out.println("Jugador afegit correctament");
         }
 
-        if (error == -1) {
+        if (retornAfegirUsuari == -1) {
             System.out.println("Ja hi ha un altre jugador controlant una fitxa d'aquest color");
         }
 
@@ -50,17 +50,17 @@ public class InterficieUsuari {
 
     public void eliminaJugador() {
         String color;
-        int error;
+        int retornEliminaJugador;
 
         System.out.println("Color de la fitxa: ");
         color = scanner.nextLine();
-        error = controlador.eliminaJugador(color);
+        retornEliminaJugador = controlador.eliminaJugador(color);
 
-        if (error == 0) {
+        if (retornEliminaJugador == 0) {
             System.out.println("Jugador eliminat correctament.");
         }
 
-        if (error == -1) {
+        if (retornEliminaJugador == -1) {
             System.out.println("No hi ha cap jugador controlant una fitxa d'aquest color");
         }
     }
@@ -76,10 +76,10 @@ public class InterficieUsuari {
 
     public static void main(String[] args) {
         InterficieUsuari iu = new InterficieUsuari();
-        iu.run();
+        iu.run();//Arranca el joc 
     }
 
-    public void mostraComandes() {
+    public void mostraComandes() {//Mostra les comandes vàlides
         this.mostraPerPantalla("Introdueix una de les comandes de la llista\nalta - Afegeix un nou jugador a la partida\nelimina - Elimina un dels jugadors afegits prèviament a la partida\ninicia - Inicia la partida amb els jugadors introduïts\najuda - Mostra novament les comandes vàlides per a l'aplicació\nsurt - Surt del joc de la oca");
     }
 
@@ -87,8 +87,9 @@ public class InterficieUsuari {
         System.out.println(msgArg);
     }
 
-    public void run() {
+    public void run() {//Metode principal del joc
         String stringComandes = ("alta elimina inicia ajuda surt");
+	//Array de Strings amb les opcions disponibles
         String[] arrayComandes = stringComandes.split(" ");
         String opcioTriada;
         boolean final_programa=false;
@@ -114,7 +115,7 @@ public class InterficieUsuari {
                 this.mostraPerPantalla("Sortint del joc de la oca...");
                 final_programa=true;                
             }
-            else{
+            else{//Si no s'introdueix cap comanda vàlida.
                     this.mostraPerPantalla("Comanda incorrecta. Necessites ajuda? escriu 'ajuda' per obtenir una llista de comandes vàlides");
             }
             

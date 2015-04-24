@@ -1,2 +1,4 @@
 # juegoOca
-juego de la oca en java para la asignatura MOO de telecos.
+Joc de la Oca per l'assignatura de MOO de telecos.
+Autors: Marta Cosano i Aleix Sanchis
+Grup: 90

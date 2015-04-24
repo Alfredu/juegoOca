@@ -31,21 +31,22 @@ public class Casella {
     //Metodes===============//   
     public void eliminaFitxa(Fitxa fitxaArg) {
         fitxes.remove(fitxaArg.getColor());
+        //fitxaArg.setCasella(null);???
     }
-
+    //Retorna la descripcio de la casella
     public String getDescripcio() {
         return this.descripcio;
     }
-
+    //retorna la fitxa del mapa que te com a clau el color pasat per parametre
     public Fitxa getFitxa(String color) {
         return this.fitxes.get(color);
     }
 
-    //+1 perque l'array de caselles va de 0 a 62;
+    //Retorna el numero de la casella (+1 perque l'array de caselles va de 0 a 62);
     public int getNumero() {
         return this.numero + 1;
     }
-
+    //Donada una fitxa la situa al mapa de fitxes de la casella i actualitza la casella actual de la fitxa a la casella des d'on sinvoca el metode
     public void situaFitxa(Fitxa fitxa) {
         fitxes.put(fitxa.getColor(), fitxa);
         fitxa.setCasella(this);
