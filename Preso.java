@@ -9,8 +9,9 @@ package entregable1;
  *
  * @author aleix
  */
-public class Preso {
-	public Preso(){
-		
+public class Preso extends Casella {
+	public static final int TORNS_SENSE_TIRAR = 3;
+	public Preso(int numeroArg, String descripcioArg){
+		super(numeroArg, descripcioArg);
 	}
 }

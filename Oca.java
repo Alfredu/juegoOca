@@ -9,6 +9,14 @@ package entregable1;
  *
  * @author aleix
  */
-public class Oca {
+public class Oca extends Casella{
+	//Atributs
+	
+	//Consctructor
+	public Oca(int numeroArg, String descripcioArg){
+		super(numeroArg, descripcioArg);
+	}
+	
+	//Metodes
 	
 }

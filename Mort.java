@@ -9,6 +9,8 @@ package entregable1;
  *
  * @author aleix
  */
-public class Mort {
-	
+public class Mort extends Casella{
+	public Mort(int numeroArg, String descripcioArg){
+		super(numeroArg, descripcioArg);
+	}
 }
