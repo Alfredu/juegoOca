@@ -10,5 +10,7 @@ package entregable1;
  * @author aleix
  */
 public class Preso {
-	
+	public Preso(){
+		
+	}
 }
