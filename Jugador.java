@@ -17,6 +17,7 @@ public class Jugador {
     private Dau dau;
     private Fitxa fitxa;
     private Tauler tauler;
+	private int tornsSenseTirar;
 
     //====Constructor===// 
     //Instanciem els atributs del Jugador i li asignem una fitxa nova situada a la casella 1;
@@ -71,5 +72,13 @@ public class Jugador {
         this.dau.tirar();
         return this.dau.getValor();
     }
+	
+	public void setTornsSenseTirar(int nTorns){
+		this.tornsSenseTirar=nTorns;
+	}
+	
+	public Tauler getTauler(){
+		return this.tauler;
+	}
 
 }

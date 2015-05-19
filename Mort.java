@@ -5,6 +5,8 @@
  */
 package entregable1;
 
+import java.util.List;
+
 /**
  *
  * @author aleix
@@ -12,5 +14,12 @@ package entregable1;
 public class Mort extends Casella{
 	public Mort(int numeroArg, String descripcioArg){
 		super(numeroArg, descripcioArg);
+	}
+	
+	@Override
+	public boolean completaJugada(Jugador jugador, List<java.lang.String> messages){
+		messages.add("Has caigut a la casella mort");
+		jugador.mouFitxa(1);
+		return false;
 	}
 }

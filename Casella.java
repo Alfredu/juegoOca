@@ -6,6 +6,7 @@
 package entregable1;
 
 import java.util.HashMap;
+import java.util.List;
 
 /**
  *
@@ -51,5 +52,10 @@ public class Casella {
         fitxes.put(fitxa.getColor(), fitxa);
         fitxa.setCasella(this);
     }
+	
+	public boolean completaJugada(Jugador jugador, List<java.lang.String> messages){
+		messages.add("Has caigut en una casella convencional");
+		return false;
+	}
 
 }

@@ -11,116 +11,102 @@ import java.util.Scanner;
  *
  * @author aleix
  */
-
 public class InterficieUsuari {
 
-    //Atributs=======//
-    private Controlador controlador;
-    private Scanner scanner;
+	//Atributs=======//
+	private Controlador controlador;
+	private Scanner scanner;
 
-    //Constructor
-    public InterficieUsuari() {
-        controlador = new Controlador(this);//Crea un nou controlador i es passa a si mateix com a parametre 
-        scanner = new Scanner(System.in);//Scanner per llegir inputs dusuari
+	//Constructor
+	public InterficieUsuari() {
+		controlador = new Controlador(this);//Crea un nou controlador i es passa a si mateix com a parametre 
+		scanner = new Scanner(System.in);//Scanner per llegir inputs dusuari
 
-    }
+	}
 
-    //Mètodes=========//
-    public void altaJugador() {
-        String nom, color;
-        int retornAfegirUsuari;
+	//Mètodes=========//
+	public void altaJugador() throws ColorFitxaExisteixException {
+		String nom, color;
 
-        System.out.println("Nom del jugador: ");//Llegeix el nom que introdueix lusuari per teclat
-        nom = scanner.nextLine();
+		System.out.println("Nom del jugador: ");//Llegeix el nom que introdueix lusuari per teclat
+		nom = scanner.nextLine();
 
-        System.out.println("Color de la fitxa:");//Igual amb el color
-        color = scanner.nextLine();
+		System.out.println("Color de la fitxa:");//Igual amb el color
+		color = scanner.nextLine();
 
-        retornAfegirUsuari = controlador.afegeixJugador(nom, color);//Crea un nou jugador i guardem el retorn 
+		controlador.afegeixJugador(nom, color);//Crea un nou jugador i guardem el retorn 
 
-        if (retornAfegirUsuari == 0) {
-            System.out.println("Jugador afegit correctament");
-        }
+		System.out.println("Jugador afegit correctament");
 
-        if (retornAfegirUsuari == -1) {
-            System.out.println("Ja hi ha un altre jugador controlant una fitxa d'aquest color");
-        }
+	}
 
-    }
+	public void eliminaJugador() throws ColorFitxaNoExisteixException {
+		String color;
+		System.out.println("Color de la fitxa: ");
+		color = scanner.nextLine();
+		controlador.eliminaJugador(color);
 
-    public void eliminaJugador() {
-        String color;
-        int retornEliminaJugador;
+		System.out.println("Jugador eliminat correctament.");
+		
+	}
 
-        System.out.println("Color de la fitxa: ");
-        color = scanner.nextLine();
-        retornEliminaJugador = controlador.eliminaJugador(color);
+	public void iniciarPartida()throws FaltenJugadorsException {
+		this.controlador.jugarPartida();
 
-        if (retornEliminaJugador == 0) {
-            System.out.println("Jugador eliminat correctament.");
-        }
+		
+	}
 
-        if (retornEliminaJugador == -1) {
-            System.out.println("No hi ha cap jugador controlant una fitxa d'aquest color");
-        }
-    }
+	public static void main(String[] args) {
+		InterficieUsuari iu = new InterficieUsuari();
+		iu.run();//Arranca el joc 
+	}
 
-    public void iniciarPartida() {
-        int status = this.controlador.jugarPartida();
+	public void mostraComandes() {//Mostra les comandes vàlides
+		this.mostraPerPantalla("Introdueix una de les comandes de la llista\nalta - Afegeix un nou jugador a la partida\nelimina - Elimina un dels jugadors afegits prèviament a la partida\ninicia - Inicia la partida amb els jugadors introduïts\najuda - Mostra novament les comandes vàlides per a l'aplicació\nsurt - Surt del joc de la oca");
+	}
 
-        if(status<0){
-            this.mostraPerPantalla("No es pot iniciar la partida, afegeix com a minim 2 jugadors per jugar");
-            
-        }
-    }
+	public void mostraPerPantalla(String msgArg) {
+		System.out.println(msgArg);
+	}
 
-    public static void main(String[] args) {
-        InterficieUsuari iu = new InterficieUsuari();
-        iu.run();//Arranca el joc 
-    }
+	public void run() {//Metode principal del joc
+		String stringComandes = ("alta elimina inicia ajuda surt");
+		//Array de Strings amb les opcions disponibles
+		String[] arrayComandes = stringComandes.split(" ");
+		String opcioTriada;
+		boolean final_programa = false;
 
-    public void mostraComandes() {//Mostra les comandes vàlides
-        this.mostraPerPantalla("Introdueix una de les comandes de la llista\nalta - Afegeix un nou jugador a la partida\nelimina - Elimina un dels jugadors afegits prèviament a la partida\ninicia - Inicia la partida amb els jugadors introduïts\najuda - Mostra novament les comandes vàlides per a l'aplicació\nsurt - Surt del joc de la oca");
-    }
+		this.mostraPerPantalla("Benvinguts a l'aplicació del joc de la oca de MOO");
+		this.mostraComandes();
 
-    public void mostraPerPantalla(String msgArg) {
-        System.out.println(msgArg);
-    }
+		while (!final_programa) {
+			try {
+				opcioTriada = scanner.nextLine();
+				if (opcioTriada.equals(arrayComandes[0])) {
+					this.altaJugador();
+				} else if (opcioTriada.equals(arrayComandes[1])) {
+					this.eliminaJugador();
+				} else if (opcioTriada.equals(arrayComandes[2])) {
+					this.iniciarPartida();
+				} else if (opcioTriada.equals(arrayComandes[3])) {
+					this.mostraComandes();
+				} else if (opcioTriada.equals(arrayComandes[4])) {
+					this.mostraPerPantalla("Sortint del joc de la oca...");
+					final_programa = true;
+				} else {//Si no s'introdueix cap comanda vàlida.
+					this.mostraPerPantalla("Comanda incorrecta. Necessites ajuda? escriu 'ajuda' per obtenir una llista de comandes vàlides");
+				}
+			} catch (ColorFitxaExisteixException e) {
+				this.mostraPerPantalla("Ja hi ha un altre jugador controlant una fitxa d'aquest color");
+			}
+			catch( FaltenJugadorsException e){
+				this.mostraPerPantalla("No es pot iniciar la partida, afegeix com a minim 2 jugadors per jugar");
+			}
+			catch(ColorFitxaNoExisteixException e){
+				this.mostraPerPantalla("No hi ha cap jugador controlant una fitxa d'aquest color");
+			}
+		}
 
-    public void run() {//Metode principal del joc
-        String stringComandes = ("alta elimina inicia ajuda surt");
-	//Array de Strings amb les opcions disponibles
-        String[] arrayComandes = stringComandes.split(" ");
-        String opcioTriada;
-        boolean final_programa=false;
-        
-        this.mostraPerPantalla("Benvinguts a l'aplicació del joc de la oca de MOO");
-        this.mostraComandes();
-        
-        while(!final_programa){
-            opcioTriada = scanner.nextLine();
-            if(opcioTriada.equals(arrayComandes[0])){
-                this.altaJugador();
-            }
-            else if(opcioTriada.equals(arrayComandes[1])){
-                this.eliminaJugador();
-            }
-            else if(opcioTriada.equals(arrayComandes[2])){
-                this.iniciarPartida();
-            }
-            else if(opcioTriada.equals(arrayComandes[3])){
-                this.mostraComandes();
-            }
-            else if(opcioTriada.equals(arrayComandes[4])){
-                this.mostraPerPantalla("Sortint del joc de la oca...");
-                final_programa=true;                
-            }
-            else{//Si no s'introdueix cap comanda vàlida.
-                    this.mostraPerPantalla("Comanda incorrecta. Necessites ajuda? escriu 'ajuda' per obtenir una llista de comandes vàlides");
-            }
-            
-        }
-        
-    }
+	}
 
 }

@@ -32,37 +32,32 @@ public class Controlador {
 
     //====Metodes===//
     //Afegeix un jugador si el color de la seva fitxa no esta en us ja.
-    public int afegeixJugador(String nomArg, String colorArg) {
+    public void afegeixJugador (String nomArg, String colorArg) throws ColorFitxaExisteixException {
         if (jugadors.containsKey(colorArg)) {
-            return -1;
-        } else {
+			
+            throw new ColorFitxaExisteixException();		
+        } 
             jugadors.put(colorArg, new Jugador(nomArg, colorArg, this.dau, this.tauler));
-            return 0;
-        }
+            
+        
     }
     //Donat un color, elimina el jugador que el te com a clau del mapa de jugadors ( si existeix)
-    public int eliminaJugador(String colorArg) {
+    public void eliminaJugador(String colorArg) throws ColorFitxaNoExisteixException {
         Jugador eliminat = jugadors.remove(colorArg);
 
         if (eliminat == null) {
-            return -1;
-        } else {
-            return 0;
-        }
+            throw new ColorFitxaNoExisteixException();
+		}
     }
    //Si ha com a minim dos jugadors, recorrre el mapa de jugadors i cada un juga el seu torn fins que algu guanya
-    public int jugarPartida() {
+    public void jugarPartida() throws FaltenJugadorsException {
         if (jugadors.size() < 2) {
-            return -1;
+            throw new FaltenJugadorsException();
         }
 
         Iterator<Jugador> it_jugador = jugadors.values().iterator();
         boolean partida_acabada = false;
         int torn = 1;
-
-        if (jugadors.size() < 2) {
-            return -1;
-        }
 
         while (it_jugador.hasNext()) {
             Jugador jugador_iterar = it_jugador.next();
@@ -98,6 +93,6 @@ public class Controlador {
             }
 
         }
-        return 0;
+        
     }
 }

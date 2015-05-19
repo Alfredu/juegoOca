@@ -5,6 +5,8 @@
  */
 package entregable1;
 
+import java.util.List;
+
 /**
  *
  * @author aleix
@@ -18,5 +20,26 @@ public class Oca extends Casella{
 	}
 	
 	//Metodes
+	@Override 
+	public boolean completaJugada(Jugador jugador, List<java.lang.String> messages){
+		messages.add("Estas a la casella " + this.getNumero()+" i es una oca");
+		messages.add("D'Oca a Oca i tiro perquè em toca!");
+		
+		if(jugador.getTauler().getSeguentOca(this.getNumero()) != null){
+			Casella seguentOca = jugador.getTauler().getSeguentOca(this.getNumero());
+			jugador.mouFitxa(seguentOca.getNumero());
+			
+			boolean haGuanyat = jugador.jugarTorn();
+			if(haGuanyat){
+				return haGuanyat;
+			}
+			
+			else{
+				messages.add("Has tirat un " + jugador.getDau().getValor() + " i caus a la casella "+jugador.numeroCasellaFitxaJugador());
+			}
+			
+		}
+		return jugador.getFitxa().getCasella().completaJugada(jugador, messages);
+	}
 	
 }
